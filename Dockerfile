@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM babim/debianbase
+FROM babim/debianbase:cron
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r mysql && useradd -r -g mysql mysql
@@ -69,6 +69,8 @@ RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/mysql.conf.d/mysqld.cnf \
 VOLUME /var/lib/mysql
 
 COPY docker-entrypoint.sh /usr/local/bin/
+ADD backup.sh /backup.sh
+RUN chmod 775 /*.sh
 RUN ln -sf /usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
 ENTRYPOINT ["/entrypoint.sh"]
 
