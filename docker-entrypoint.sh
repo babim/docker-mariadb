@@ -193,7 +193,4 @@ SSHPASS1=${SSHPASS:-root}
 echo "root:$SSHPASS1" | chpasswd
 service ssh start
 
-#cron
-service cron start
-
 exec "$@"
