@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM babim/debianbase:ssh
+FROM babim/debianbase:cron
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r mysql && useradd -r -g mysql mysql
@@ -58,8 +58,8 @@ RUN echo "deb https://repo.percona.com/apt jessie main" > /etc/apt/sources.list.
 		echo 'Pin-Priority: 998'; \
 	} > /etc/apt/preferences.d/percona
 
-ENV MARIADB_MAJOR 10.2
-ENV MARIADB_VERSION 10.2.8+maria~jessie
+ENV MARIADB_MAJOR 10.3
+ENV MARIADB_VERSION 10.3.1+maria~jessie
 
 RUN echo "deb http://ftp.osuosl.org/pub/mariadb/repo/$MARIADB_MAJOR/debian jessie main" > /etc/apt/sources.list.d/mariadb.list \
 	&& { \
@@ -99,6 +99,8 @@ RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf \
 VOLUME /var/lib/mysql
 
 COPY docker-entrypoint.sh /usr/local/bin/
+ADD backup.sh /backup.sh
+RUN chmod 775 /*.sh
 RUN ln -sf /usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
 ENTRYPOINT ["/entrypoint.sh"]
 
