@@ -200,9 +200,4 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 	fi
 fi
 
-# set password root is root
-SSHPASS1=${SSHPASS:-root}
-echo "root:$SSHPASS1" | chpasswd
-service ssh start
-
 exec "$@"
