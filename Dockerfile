@@ -70,7 +70,7 @@ VOLUME /var/lib/mysql
 
 COPY docker-entrypoint.sh /usr/local/bin/
 ADD backup.sh /backup.sh
-RUN chmod 775 /*.sh
+RUN chmod 775 /*.sh && usermod -u 66 mysql && groupmod -g 66 mysql
 RUN ln -sf /usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
 ENTRYPOINT ["/entrypoint.sh"]
 
