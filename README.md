@@ -18,3 +18,7 @@ MYSQL_DATABASE
 MYSQL_USER
 MYSQL_PASSWORD
 ```
+custom config
+```
+-v /my/custom:/etc/mysql/conf.d
+```
