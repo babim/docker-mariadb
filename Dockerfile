@@ -27,6 +27,7 @@ RUN chown mysql:mysql /usr/local/bin/actions.mk /usr/local/bin/wait-for-mariadb.
 
 COPY *.tpl /etc/gotpl/
 COPY docker-entrypoint.sh /
+RUN chmod 775 /docker-entrypoint.sh
 
 WORKDIR /var/lib/mysql
 VOLUME /var/lib/mysql
