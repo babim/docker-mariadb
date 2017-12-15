@@ -37,7 +37,7 @@ RUN set -ex; \
 	apt-key list > /dev/null
 
 ENV MYSQL_MAJOR 5.6
-ENV MYSQL_VERSION 5.6.37-1debian8
+ENV MYSQL_VERSION 5.6.38-1debian8
 
 RUN echo "deb http://repo.mysql.com/apt/debian/ jessie mysql-${MYSQL_MAJOR}" > /etc/apt/sources.list.d/mysql.list
 
@@ -65,6 +65,11 @@ VOLUME /var/lib/mysql
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN ln -sf /usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
 RUN chmod 775 /usr/local/bin/docker-entrypoint.sh
+
+# backup
+COPY backup.sh /backup.sh
+RUN chmod 755 /backup.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 3306
