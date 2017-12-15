@@ -200,7 +200,11 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 	fi
 fi
 
-#cron
-service cron start
+# ssh
+if [ -f "/runssh.sh" ]; then /runssh.sh; fi
+# cron
+if [ -f "/runcron.sh" ]; then /runcron.sh; fi
+# nfs
+if [ -f "/mountnfs.sh" ]; then /mountnfs.sh; fi
 
 exec "$@"
