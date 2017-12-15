@@ -74,6 +74,11 @@ VOLUME /var/lib/mysql
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN ln -sf /usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
 RUN chmod 775 /usr/local/bin/docker-entrypoint.sh
+
+# backup
+COPY backup.sh /backup.sh
+RUN chmod 755 /backup.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 3306
