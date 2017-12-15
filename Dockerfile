@@ -29,6 +29,10 @@ COPY *.tpl /etc/gotpl/
 COPY docker-entrypoint.sh /
 RUN chmod 775 /docker-entrypoint.sh
 
+# backup
+COPY backup.sh /backup.sh
+RUN chmod 755 /backup.sh
+
 WORKDIR /var/lib/mysql
 VOLUME /var/lib/mysql
 
