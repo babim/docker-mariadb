@@ -1,31 +1,5 @@
 # vim:set ft=dockerfile:
-FROM babim/debianbase
-
-# Download option
-RUN apt-get update && \
-    apt-get install -y wget bash && cd / && wget https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20SCRIPT%20AUTO/option.sh && \
-    chmod 755 /option.sh && apt-get purge -y wget
-
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN groupadd -r mysql && useradd -r -g mysql mysql
-
-RUN apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr && rm -rf /var/lib/apt/lists/*
-
-# add gosu for easy step-down from root
-ENV GOSU_VERSION 1.7
-RUN set -x \
-	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
-	&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
-	&& wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
-	&& export GNUPGHOME="$(mktemp -d)" \
-	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-	&& rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc \
-	&& chmod +x /usr/local/bin/gosu \
-	&& gosu nobody true \
-	&& apt-get purge -y --auto-remove ca-certificates wget
-
-RUN mkdir /docker-entrypoint-initdb.d
+FROM babim/mariadb:base
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 # for MYSQL_RANDOM_ROOT_PASSWORD
@@ -81,17 +55,3 @@ RUN mkdir -p /var/lib/mysql /var/run/mysqld \
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
 	&& chmod 777 /var/run/mysqld
 
-VOLUME /var/lib/mysql
-
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN ln -sf /usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
-RUN chmod 775 /usr/local/bin/docker-entrypoint.sh
-
-# backup
-COPY backup.sh /backup.sh
-RUN chmod 755 /backup.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
-
-EXPOSE 3306
-CMD ["mysqld"]
