@@ -26,6 +26,8 @@ custom config
 ## Environment ssh, cron option
 ```
 SSH=false
+SSHPASS=root (or you set)
+
 CRON=false
 NFS=false
 SYNOLOGY=false
