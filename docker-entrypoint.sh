@@ -44,10 +44,8 @@ _check_config() {
 	toRun=( "$@" --verbose --help --log-bin-index="$(mktemp -u)" )
 	if ! errors="$("${toRun[@]}" 2>&1 >/dev/null)"; then
 		cat >&2 <<-EOM
-
 			ERROR: mysqld failed while attempting to check config
 			command was: "${toRun[*]}"
-
 			$errors
 		EOM
 		exit 1
@@ -88,7 +86,8 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 		mkdir -p "$DATADIR"
 
 		echo 'Initializing database'
-		mysql_install_db --datadir="$DATADIR" --rpm
+		# "Other options are passed to mysqld." (so we pass all "mysqld" arguments directly here)
+		mysql_install_db --datadir="$DATADIR" --rpm "${@:2}"
 		echo 'Database initialized'
 
 		SOCKET="$(_get_config 'socket' "$@")"
@@ -135,7 +134,6 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 			-- What's done in this file shouldn't be replicated
 			--  or products like mysql-fabric won't work
 			SET @@SESSION.SQL_LOG_BIN=0;
-
 			DELETE FROM mysql.user WHERE user NOT IN ('mysql.sys', 'mysqlxsys', 'root') OR host NOT IN ('localhost') ;
 			SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
 			GRANT ALL ON *.* TO 'root'@'localhost' WITH GRANT OPTION ;
@@ -162,8 +160,6 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 			if [ "$MYSQL_DATABASE" ]; then
 				echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%' ;" | "${mysql[@]}"
 			fi
-
-			echo 'FLUSH PRIVILEGES ;' | "${mysql[@]}"
 		fi
 
 		echo
@@ -188,11 +184,7 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 	fi
 fi
 
-# ssh
-if [ -f "/runssh.sh" ]; then /runssh.sh; fi
-# cron
-if [ -f "/runcron.sh" ]; then /runcron.sh; fi
-# nfs
-if [ -f "/mountnfs.sh" ]; then /mountnfs.sh; fi
+# option
+if [ -f "/option.sh" ]; then /option.sh; fi
 
 exec "$@"
