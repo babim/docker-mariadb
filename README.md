@@ -2,9 +2,9 @@
 
 tag:
 ```
-10.1		10.1.ssh		10.1.cron		10.1.cron.ssh
-10.2		10.2.ssh		10.2.cron		10.2.cron.ssh
-10.3		10.3.ssh		10.3.cron		10.3.cron.ssh
+10.0		10.1			10.1.alpine
+10.2		5.5			mysql5.6		mysql5.7
+10.3		mysql5.5		mysql5.8
 ```
 
 ### Add VOLUMEs to allow backup of config and databases
@@ -21,4 +21,40 @@ MYSQL_PASSWORD
 custom config
 ```
 -v /my/custom:/etc/mysql/conf.d
+```
+
+## Environment ssh, cron option
+```
+SSH=false
+CRON=false
+NFS=false
+SYNOLOGY=false
+UPGRADE=false
+WWWUSER=www-data
+MYSQLUSER=mysql
+FULLOPTION=true
+```
+
+## NFS option
+Writing back to the host:
+```
+docker run -itd \
+    --privileged=true \
+    --net=host \
+    --name nfs-movies \
+    -v /media/nfs-movies:/mnt/nfs-1:shared \
+    -e SERVER=192.168.0.9 \
+    -e SHARE=movies \
+    babim/........
+```
+```
+default:
+FSTYPE nfs4
+MOUNT_OPTIONS nfsvers=4
+MOUNTPOINT /mnt/nfs-1
+---
+max FSTYPE, MOUNT_OPTIONS, MOUNTPOINT
+FSTYPE2
+FSTYPE3
+FSTYPE4
 ```
