@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM babim/debianbase
+FROM babim/debianbase:jessie
 
 # Download option
 RUN apt-get update && \
