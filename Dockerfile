@@ -13,7 +13,7 @@ RUN set -xe && \
         bash \
         ca-certificates \
         make \
-        mariadb=${MARIADB_VER} \
+        mariadb \
         mariadb-client \
         pwgen \
         tzdata \
