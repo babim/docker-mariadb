@@ -59,7 +59,7 @@ RUN { \
 # comment out any "user" entires in the MySQL config ("docker-entrypoint.sh" or "--user" will handle user switching)
 	&& sed -ri 's/^user\s/#&/' /etc/mysql/my.cnf /etc/mysql/conf.d/* \
 # purge and re-create /var/lib/mysql with appropriate ownership
-	&& rm -rf /var/lib/mysql/* && mkdir -p /var/run/mysqld \
+	&& rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql var/run/mysqld \
 	&& chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
 	&& chmod 777 /var/run/mysqld \
@@ -70,3 +70,6 @@ RUN { \
 # don't reverse lookup hostnames, they are usually another container
 	&& echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/conf.d/docker.cnf
 
+# Define mountable directories.
+VOLUME ["/var/lib/mysql", "/etc/mysql/conf.d"]
+RUN mkdir -p /etc-start/mysql && cp -R /etc/mysql/* /etc-start/mysql
