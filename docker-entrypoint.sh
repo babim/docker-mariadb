@@ -2,6 +2,11 @@
 set -eo pipefail
 shopt -s nullglob
 
+# copy mysql config
+if [ -d "/etc/mysql" ]; then
+if [ -z "`ls /etc/mysql`" ]; then cp -R /etc-start/mysql/* /etc/mysql; fi
+fi
+
 # if command starts with an option, prepend mysqld
 if [ "${1:0:1}" = '-' ]; then
 	set -- mysqld "$@"

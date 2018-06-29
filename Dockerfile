@@ -46,8 +46,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		pwgen \
 	&& rm -rf /var/lib/apt/lists/*
 
-VOLUME ["/var/lib/mysql", "/etc/mysql/conf.d"]
-
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN ln -sf /usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards
 RUN chmod 775 /usr/local/bin/docker-entrypoint.sh
