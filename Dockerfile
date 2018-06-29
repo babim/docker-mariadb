@@ -42,5 +42,5 @@ RUN { \
 	&& chmod 777 /var/run/mysqld
 
 # Define mountable directories.
-VOLUME ["/var/lib/mysql", "/etc/mysql/conf.d"]
+VOLUME ["/var/lib/mysql", "/etc/mysql"]
 RUN mkdir -p /etc-start/mysql && cp -R /etc/mysql/* /etc-start/mysql
