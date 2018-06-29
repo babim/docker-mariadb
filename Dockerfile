@@ -78,7 +78,6 @@ RUN echo "deb https://repo.percona.com/apt wheezy main" > /etc/apt/sources.list.
 	} > /etc/apt/preferences.d/percona
 
 ENV MARIADB_MAJOR 5.5
-ENV MARIADB_VERSION 5.5.60+maria-1~wheezy
 
 RUN echo "deb http://ftp.osuosl.org/pub/mariadb/repo/$MARIADB_MAJOR/debian wheezy main" > /etc/apt/sources.list.d/mariadb.list \
 	&& { \
@@ -97,7 +96,7 @@ RUN { \
 	} | debconf-set-selections \
 	&& apt-get update \
 	&& apt-get install -y \
-		"mariadb-server=$MARIADB_VERSION" \
+		mariadb-server \
 # percona-xtrabackup is installed at the same time so that `mysql-common` is only installed once from just mariadb repos
 		percona-xtrabackup \
 		socat \
