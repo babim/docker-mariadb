@@ -5,7 +5,7 @@ RUN apk add --no-cache wget bash && cd / && wget --no-check-certificate https://
     chmod 755 /option.sh && apk del wget
 
 ENV GOTPL_VER 0.1.5
-ENV MARIADB_VER 10.1.26-r0
+#ENV MARIADB_VER 10.1.26-r0
 ENV GOTPL_URL https://github.com/wodby/gotpl/releases/download/${GOTPL_VER}/gotpl-alpine-linux-amd64-${GOTPL_VER}.tar.gz
 
 RUN set -xe && \
