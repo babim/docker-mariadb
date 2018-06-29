@@ -2,6 +2,11 @@
 
 set -e
 
+# copy mysql config
+if [ -d "/etc/mysql" ]; then
+if [ -z "`ls /etc/mysql`" ]; then cp -R /etc-start/mysql/* /etc/mysql; fi
+fi
+
 if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
