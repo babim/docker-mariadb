@@ -38,7 +38,10 @@ COPY backup.sh /backup.sh
 RUN chmod 755 /backup.sh
 
 WORKDIR /var/lib/mysql
-VOLUME /var/lib/mysql
+
+# Define mountable directories.
+VOLUME ["/var/lib/mysql", "/etc/mysql/conf.d"]
+RUN mkdir -p /etc-start/mysql && cp -R /etc/mysql/* /etc-start/mysql
 
 EXPOSE 3306
 
