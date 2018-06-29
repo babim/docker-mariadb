@@ -46,3 +46,7 @@ RUN { \
 		| xargs -rt -0 sed -Ei 's/^(bind-address|log)/#&/' \
 # don't reverse lookup hostnames, they are usually another container
 	&& echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/conf.d/docker.cnf
+
+# Define mountable directories.
+VOLUME ["/var/lib/mysql", "/etc/mysql/conf.d"]
+RUN mkdir -p /etc-start/mysql && cp -R /etc/mysql/* /etc-start/mysql
