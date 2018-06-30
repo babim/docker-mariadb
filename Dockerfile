@@ -2,7 +2,7 @@ FROM babim/alpinebase
 
 ## alpine linux
 RUN apk add --no-cache wget bash && cd / && wget --no-check-certificate https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20SCRIPT%20AUTO/option.sh && \
-    chmod 755 /option.sh && apk del wget
+    chmod 755 /option.sh
 
 ENV GOTPL_VER 0.1.5
 #ENV MARIADB_VER 10.1.26-r0
@@ -16,8 +16,7 @@ RUN set -xe && \
         mariadb \
         mariadb-client \
         pwgen \
-        tzdata \
-        wget && \
+        tzdata && \
 
     wget -qO- ${GOTPL_URL} | tar xz -C /usr/local/bin
 
