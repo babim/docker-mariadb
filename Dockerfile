@@ -20,6 +20,8 @@ RUN set -ex; \
 
 # add repo Mariadb
 ENV GPG_KEYS \
+	199369E5404BD5FC7D2FE43BCBCB082A1BB943DB \
+	430BDF5C56E7C94E848EE60C1C4CBDCDCD2EFD2A \
 	4D1BB29D63D98E422B2113B19334A25F8507EFA5
 RUN set -ex; \
 	export GNUPGHOME="$(mktemp -d)"; \
@@ -51,7 +53,6 @@ apt-key list > /dev/null
 RUN mkdir /docker-entrypoint-initdb.d
 
 # install "pwgen" for randomizing passwords
-# install "apt-transport-https" for Percona's repo (switched to https-only)
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		pwgen \
 	&& rm -rf /var/lib/apt/lists/*
