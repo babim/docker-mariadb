@@ -4,7 +4,7 @@ FROM babim/debianbase:8
 # Download option
 RUN apt-get update && \
     apt-get install -y wget bash && cd / && wget --no-check-certificate https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20SCRIPT%20AUTO/option.sh && \
-    chmod 755 /option.sh
+    chmod 755 /option.sh && apt-get install -y --no-install-recommends apt-transport-https ca-certificates
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r mysql && useradd -r -g mysql mysql
@@ -52,7 +52,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 # install "pwgen" for randomizing passwords
 # install "apt-transport-https" for Percona's repo (switched to https-only)
-RUN apt-get update && apt-get install -y --no-install-recommends apt-transport-https ca-certificates \
+RUN apt-get update && apt-get install -y --no-install-recommends \
 		pwgen \
 	&& rm -rf /var/lib/apt/lists/*
 
