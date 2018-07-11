@@ -6,9 +6,6 @@ RUN apt-get update && \
     apt-get install -y wget bash && cd / && wget --no-check-certificate https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20SCRIPT%20AUTO/option.sh && \
     chmod 755 /option.sh && apt-get install -y --no-install-recommends apt-transport-https ca-certificates
 
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN groupadd -r mysql && useradd -r -g mysql mysql
-
 # add gosu for easy step-down from root
 ENV GOSU_VERSION 1.10
 RUN set -ex; \
