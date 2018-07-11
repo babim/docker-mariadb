@@ -45,7 +45,7 @@ RUN set -ex; \
 	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
 	gpg --export "$key" > /etc/apt/trusted.gpg.d/mysql.gpg; \
 	rm -rf "$GNUPGHOME"; \
-apt-key list > /dev/null
+	apt-key list > /dev/null
 
 RUN mkdir /docker-entrypoint-initdb.d
 
@@ -61,8 +61,3 @@ RUN chmod 775 /usr/local/bin/docker-entrypoint.sh
 # backup
 COPY backup.sh /backup.sh
 RUN chmod 755 /backup.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
-
-EXPOSE 3306
-CMD ["mysqld"]
