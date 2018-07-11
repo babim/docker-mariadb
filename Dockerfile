@@ -1,5 +1,9 @@
 FROM babim/debianbase:9
 
+# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+RUN groupadd -r mysql && useradd -r -g mysql mysql
+
+# install mysql
 # Download option
 ## ubuntu/debian
 RUN apt-get update && \
