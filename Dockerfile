@@ -37,3 +37,8 @@ RUN mkdir -p /var/lib/mysql /var/run/mysqld \
 # Define mountable directories.
 VOLUME ["/var/lib/mysql", "/etc/mysql/conf.d"]
 RUN mkdir -p /etc-start/mysql && cp -R /etc/mysql/* /etc-start/mysql
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+EXPOSE 3306
+CMD ["mysqld"]
