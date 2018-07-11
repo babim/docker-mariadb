@@ -1,6 +1,10 @@
 # vim:set ft=dockerfile:
 FROM babim/mariadb:base
 
+# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+RUN groupadd -r mysql && useradd -r -g mysql mysql
+
+# install mysql
 ENV MARIADB_MAJOR 10.0
 
 RUN echo "deb http://ftp.osuosl.org/pub/mariadb/repo/$MARIADB_MAJOR/debian jessie main" > /etc/apt/sources.list.d/mariadb.list \
