@@ -2,10 +2,11 @@
 FROM babim/mariadb:base
 
 # install mysql
+ENV OSDEB jessie
 ENV MARIADB_MAJOR 10.0
 
 RUN apt-get update && \
-    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mariadb10.sh | bash
+    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mariadb_install.sh | bash
 
 # clean
 RUN apt-get clean && \
