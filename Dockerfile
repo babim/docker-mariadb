@@ -7,7 +7,7 @@ ENV MYSQL_MAJOR 5.5
 ENV MYSQL_VERSION 5.5.61
 
 RUN apt-get update && \
-    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mysql_install.sh | bash
+    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mysql55_install.sh | bash
 
 # clean
 RUN apt-get clean && \
