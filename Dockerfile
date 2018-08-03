@@ -1,13 +1,20 @@
 # vim:set ft=dockerfile:
 FROM debian:wheezy
 
-# install mysql
+# Download option
+RUN apt-get update && \
+    apt-get install -y wget bash curl && cd / && wget --no-check-certificate https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20SCRIPT%20AUTO/option.sh && \
+    chmod 755 /option.sh
+
 ENV OSDEB wheezy
+# install repo
+RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mariadb-repo-debian.sh | bash
+
+# install mysql
 ENV MARIADB_MAJOR 5.5
 
 RUN apt-get update && \
-    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mariadb10.sh | bash && \
-    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mariadb10.sh | bash
+    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mariadb_install.sh | bash
 
 # clean
 RUN apt-get clean && \
