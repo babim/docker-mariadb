@@ -8,7 +8,7 @@ RUN apt-get update && \
 
 ENV OSDEB jessie
 # install repo
-RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mariadb-repo-debian.sh | bash
+RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/repo-debian.sh | bash
 
 # clean
 RUN apt-get clean && \
