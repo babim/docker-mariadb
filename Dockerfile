@@ -1,7 +1,7 @@
 # vim:set ft=dockerfile:
 FROM babim/mariadb:base
 
-ENV OSDEB stretch
+ENV OSDEB jessie
 
 # install mysql
 ENV MYSQL_MAJOR 8.0
