@@ -13,5 +13,4 @@ RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%
 # clean
 RUN apt-get clean && \
     apt-get autoclean && \
-    apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
