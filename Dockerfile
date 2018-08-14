@@ -15,7 +15,3 @@ RUN apt-get clean && \
     apt-get autoclean && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
-
-# backup
-COPY backup.sh /backup.sh
-RUN chmod 755 /backup.sh
