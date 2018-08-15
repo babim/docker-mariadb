@@ -9,7 +9,8 @@ RUN apt-get update && \
 ENV OSDEB jessie
 # install repo
 # install ssl
-RUN apt-get install -y --no-install-recommends wget apt-transport-https ca-certificates gpg
+RUN apt-get install -y --no-install-recommends wget apt-transport-https ca-certificates
+# gpg
 
 # add gosu for easy step-down from root
 ENV GOSU_VERSION 1.10
