@@ -7,11 +7,13 @@ RUN apt-get update && \
     apt-get install -y wget bash curl && cd / && wget --no-check-certificate https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20SCRIPT%20AUTO/option.sh && \
     chmod 755 /option.sh
 
-# install ssl
-RUN apt-get install -y --no-install-recommends wget apt-transport-https ca-certificates
-# gpg
+# install "apt-transport-https" for Percona's repo (switched to https-only)
 # install "pwgen" for randomizing passwords
-RUN apt-get install -y --no-install-recommends pwgen
+# install "tzdata" for /usr/share/zoneinfo/
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		apt-transport-https ca-certificates \
+		pwgen \
+		tzdata
 
 # add gosu for easy step-down from root
 ENV GOSU_VERSION 1.10
