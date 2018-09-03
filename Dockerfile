@@ -5,8 +5,9 @@ FROM babim/mariadb:base
 ENV OSDEB jessie
 ENV MARIADB_MAJOR 10.3
 
-RUN apt-get update && \
-    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mariadb_install.sh | bash
+RUN apt-get update && cd / \
+    wget https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mariadb_install.sh && \
+    /mariadb_install.sh && rm -f /mariadb_install.sh
 
 # clean
 RUN apt-get clean && \
