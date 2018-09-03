@@ -5,9 +5,10 @@ FROM babim/mariadb:base
 ENV OSDEB jessie
 ENV MYSQL_MAJOR 5.5
 ENV MYSQL_VERSION 5.5.61
+ENV FILEDOWNLOAD mysql55_install.sh
 
-RUN apt-get update && \
-    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mysql55_install.sh | bash
+RUN cd / && wget https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/$FILEDOWNLOAD && \
+    chmod +x /$FILEDOWNLOAD && /$FILEDOWNLOAD && rm -f /$FILEDOWNLOAD
 
 # clean
 RUN apt-get clean && \
