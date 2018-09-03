@@ -27,8 +27,7 @@ ENV OSDEB wheezy
 ENV MARIADB_MAJOR 5.5
 ENV FILEDOWNLOAD mariadb_install.sh
 
-RUN cd / && wget https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/$FILEDOWNLOAD && \
-    chmod +x /$FILEDOWNLOAD && /$FILEDOWNLOAD && rm -f /$FILEDOWNLOAD
+RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/$FILEDOWNLOAD | bash
 
 # clean
 RUN apt-get clean && \
