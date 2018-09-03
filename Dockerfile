@@ -4,9 +4,10 @@ FROM babim/mariadb:base
 # install mysql
 ENV OSDEB jessie
 ENV MARIADB_MAJOR 10.1
+ENV FILEDOWNLOAD mariadb_install.sh
 
-RUN apt-get update && \
-    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/mariadb_install.sh | bash
+RUN cd / && wget https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/$FILEDOWNLOAD && \
+    chmod +x /$FILEDOWNLOAD && /$FILEDOWNLOAD && rm -f /$FILEDOWNLOAD
 
 # clean
 RUN apt-get clean && \
