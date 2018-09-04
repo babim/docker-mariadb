@@ -1,5 +1,6 @@
 # vim:set ft=dockerfile:
-FROM debian:wheezy
+FROM babim/debianbase:7
+ENV OSDEB wheezy
 
 # Download option
 RUN apt-get update && \
@@ -23,7 +24,6 @@ RUN set -ex; \
 	gosu nobody true
 
 # install mysql
-ENV OSDEB wheezy
 ENV MARIADB_MAJOR 5.5
 ENV FILEDOWNLOAD mariadb_install.sh
 
