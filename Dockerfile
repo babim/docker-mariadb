@@ -10,7 +10,7 @@ RUN apt-get update && \
 # install "pwgen" for randomizing passwords
 # install "tzdata" for /usr/share/zoneinfo/
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		apt-transport-https ca-certificates \
+		apt-transport-https ca-certificates gpg \
 		pwgen \
 		tzdata
 
