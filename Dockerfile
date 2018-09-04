@@ -11,7 +11,7 @@ RUN apt-get update && \
 # install "tzdata" for /usr/share/zoneinfo/
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		apt-transport-https ca-certificates gpg \
-		pwgen \
+		pwgen dirmngr \
 		tzdata
 
 # add gosu for easy step-down from root
