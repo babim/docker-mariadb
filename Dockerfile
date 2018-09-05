@@ -15,14 +15,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		pwgen \
 		tzdata
 
-# add gosu for easy step-down from root
-ENV GOSU_VERSION 1.10
-RUN set -ex; \
-	dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')"; \
-	wget --no-check-certificate --progress=bar:force -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch"; \
-	chmod +x /usr/local/bin/gosu; \
-	gosu nobody true
-
 # clean
 RUN apt-get clean && \
     apt-get autoclean && \
