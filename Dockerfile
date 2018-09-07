@@ -4,7 +4,8 @@ FROM babim/mariadb:base
 # install mysql
 ENV OSDEB jessie
 ENV MYSQL_MAJOR 5.6
-ENV FILEDOWNLOAD mysql_install.sh
+ENV FILEDOWNLOAD mariadb_install.sh
+ENV TYPESQL mysql
 
 RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/$FILEDOWNLOAD | bash
 
