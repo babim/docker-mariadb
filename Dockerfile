@@ -1,6 +1,6 @@
 # vim:set ft=dockerfile:
 FROM babim/debianbase:9
-ENV OSDEB jessie
+ENV OSDEB stretch
 
 # Download option
 RUN apt-get update && \
