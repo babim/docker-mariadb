@@ -13,7 +13,7 @@ RUN apt-get update && \
     chmod 755 /option.sh
 
 # install mysql
-RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/$FILEDOWNLOAD | bash
+RUN wget -O - https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/$FILEDOWNLOAD | bash
 
 # clean
 RUN apt-get clean && \
