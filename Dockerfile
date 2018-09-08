@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM babim/debianbase:8
+FROM babim/debianbase:9
 ENV OSDEB jessie
 
 # Download option
