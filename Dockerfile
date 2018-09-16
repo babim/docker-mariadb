@@ -29,4 +29,4 @@ VOLUME ["/var/lib/mysql", "/etc/mysql"]
 ENTRYPOINT ["/start.sh"]
 
 EXPOSE 3306
-CMD ["mysqld"]
+CMD ["supervisord", "-nc", "/etc/supervisor/supervisord.conf"]
