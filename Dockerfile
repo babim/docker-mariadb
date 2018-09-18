@@ -18,7 +18,7 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Define mountable directories.
-VOLUME ["/var/lib/mysql", "/etc/mysql"]
+#VOLUME ["/var/lib/mysql", "/etc/mysql"]
 
 ENTRYPOINT ["/start.sh"]
 
