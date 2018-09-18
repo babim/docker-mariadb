@@ -2,7 +2,7 @@
 FROM babim/mariadb:base
 
 # install mysql
-ENV OSDEB stretch
+ENV OSDEB jessie
 ENV MARIADB_MAJOR 10.2
 ENV FILEDOWNLOAD mariadb_install.sh
 ENV TYPESQL mariadb
