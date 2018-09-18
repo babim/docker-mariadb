@@ -18,3 +18,7 @@ RUN wget -O - https://raw.githubusercontent.com/babim/docker-tag-options/master/
 VOLUME ["/var/lib/mysql", "/etc/mysql"]
 
 EXPOSE 3306
+
+ENTRYPOINT ["/start.sh"]
+CMD ["mysqld"]
+#CMD ["supervisord", "-nc", "/etc/supervisor/supervisord.conf"]
