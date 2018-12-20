@@ -1,5 +1,4 @@
 FROM babim/debianbase:9
-ENV OSDEB stretch
 
 # Download option
 RUN apt-get update && \
