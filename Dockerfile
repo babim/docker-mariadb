@@ -1,4 +1,4 @@
-FROM babim/debianbase:9
+FROM babim/debianbase:8
 
 # Download option
 RUN apt-get update && \
@@ -6,7 +6,7 @@ RUN apt-get update && \
     chmod 755 /option.sh
 
 # install mysql
-ENV OSDEB stretch
+ENV OSDEB jessie
 ENV MARIADB_MAJOR 10.0
 ENV FILEDOWNLOAD mariadb_install.sh
 ENV TYPESQL mariadb
