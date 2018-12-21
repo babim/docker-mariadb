@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM babim/ubuntubase:14.04
+FROM babim/debianbase:9
 ENV OSDEB trusty
 
 # Download option
@@ -8,7 +8,7 @@ RUN apt-get update && \
     chmod 755 /option.sh
 
 # install mysql
-ENV MARIADB_MAJOR 5.5
+ENV MARIADB_MAJOR 10.4
 ENV FILEDOWNLOAD mariadb_install.sh
 ENV TYPESQL mariadb
 
