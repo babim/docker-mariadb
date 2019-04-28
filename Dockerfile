@@ -7,7 +7,7 @@ ENV MYSQL_MAJOR 5.6
 ENV FILEDOWNLOAD mariadb_install.sh
 ENV TYPESQL mysql
 
-RUN wget --no-check-certificate -O - https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/$FILEDOWNLOAD | bash
+RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Mariadb%20install/$FILEDOWNLOAD | bash
 
 # Define mountable directories.
 VOLUME ["/var/lib/mysql", "/etc/mysql"]
